@@ -63,5 +63,4 @@ def post_detail(request, id):
         context = {'post': posts[id]}
     except IndexError:
         return Http404('blog:index')
-    return render(request,'blog/detail.html', context)
-
+    return render(request, 'blog/detail.html', context)
