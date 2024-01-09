@@ -1,19 +1,33 @@
-  <article>
-    <ul>
-      <li>
+{% if index %}
+  <h1>Лента записей</h1>
+{% endif %}
+<article>
+  <ul>
+    <li>
         Место: {{ post.location }}
-      </li>
-      <li>
+    </li>
+    <li>
         Дата: {{ post.date }}
-      </li>
-      <li>
+    </li>
+    <li>
         Категория:
-        <a href="{% url 'blog:category_posts' post.category %}">
+      <a href="{% url 'blog:category_posts' post.category %}">
           {{ post.category }}
-        </a>
-      </li>
-    </ul>
-      <p>
+      </a>
+    </li>
+  </ul>
+  {% if detail %}
+    <p>
+      {{ post.text }}
+    </p>
+  {% endif %}
+  {% if index %}
+    <p>
+      {{ post.text|truncatewords:10 }}
+    </p>
+    <a href="{% url 'blog:post_detail' post.id %}">Читать полный текст</a>
+  {% endif %}
+    <p>
         {{ post.text|linebreaksbr }}
-      </p>
-  </article>
+    </p>
+</article>

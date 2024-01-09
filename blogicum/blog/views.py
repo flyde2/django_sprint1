@@ -58,9 +58,12 @@ def category_posts(request, category_slug):
     return render(request, template, context)
 
 
+posts_dict = {post['id']: post for post in posts}
+
+
 def post_detail(request, post_id):
-    post = next((post for post in posts if post['id'] == post_id), None)
+    post = posts_dict.get(post_id)
     if not post:
-        raise Http404
+        raise Http404('No such post exists')
     context = {'post': post}
     return render(request, 'blog/detail.html', context)
